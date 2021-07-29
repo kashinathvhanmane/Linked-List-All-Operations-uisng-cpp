@@ -1,0 +1,516 @@
+#include<iostream>
+using namespace std;
+
+
+struct Node
+{
+        public:
+        struct Node *next;
+        int data;
+};
+
+
+class SinlyLinkList
+{
+     public:
+     
+     struct Node *root=NULL;
+     
+     void insertatEnd(int data)
+     {
+        struct Node *temp;
+        temp=new Node;
+        
+        temp->data=data;
+        temp->next=NULL;
+        
+        if(root==NULL)
+        {
+                root=temp;
+        }
+         else
+         {
+                struct Node *p;
+                p=root;
+                while(p->next!=NULL)
+                {
+                      p=p->next;
+                }
+                p->next=temp;
+                temp->next=NULL;
+           }
+     }
+     
+     
+     
+     void insertAtBegining(int data)
+     {
+        struct Node *temp;
+        temp=new Node;
+        
+        temp->data=data;
+        temp->next=NULL;
+        
+        if(root==NULL)
+        {
+                root=temp;
+        }
+        else
+        {
+               temp->next=root;
+               root=temp;
+                
+                
+         }
+         
+         
+        
+        
+     }
+     
+     
+     void insert_in_between(int data)
+     {
+        
+     
+     
+     
+     
+        struct Node *q;
+        int count=0;
+        q=root;
+        
+        
+        
+        while(q!=NULL)
+        {
+                q=q->next;
+                count++;
+        }
+        
+        cout<<"Lenght of list is:"<<count;
+        
+        
+        if(count>=2)
+        {
+                struct Node *temp;
+                
+                int val;
+                int pos;
+                
+                cout<<"\nEnter position you want to add node:";
+                cin>>pos;
+                if(pos>count)
+                {
+                        cout<<"\nnot possible toinsert node......";
+                 }
+                 else
+                 {
+                        cout<<"\nEnter data:";
+                        cin>>val;
+                        struct Node *temp;
+                        temp=new Node;
+                      
+                        temp->data=val;
+                        temp->next=NULL;
+                        
+                        struct Node *p;
+                        p=root;
+                        int i=0;
+                        
+                        while(i!=pos)
+                        {
+                                p=p->next;
+                                i++;
+                         }
+                         temp->next=p->next;
+                         p->next=temp;
+                         cout<<"data inserted sucessfully.........";
+                         
+                   }
+        }
+        else
+        {
+                cout<<"\nadd more elements.......";
+                
+                struct Node *first;
+                first=new Node;
+                first->next=NULL;
+                first->data=data;
+                
+                if(root==NULL)
+                {
+                        root=first;
+                 }
+                 else
+                 {
+                        first->next=root;
+                        root=first;
+                 }
+         }
+   }
+   
+   
+   
+   
+ void deleteFirstNode()
+ {
+        struct Node *p;
+        if(root->next==NULL)
+        {
+                cout<<"list contain only one element ";
+               return;
+         }
+         
+         root->data=root->next->data;
+         
+         p=root->next;
+         
+         root->next=NULL;
+         
+         free(p);
+         cout<<"node deleted sucessfully........";
+  }
+  
+  void deleteLstNode()
+  {
+       struct Node *p;
+       struct Node *q;
+       
+       p=root;
+       
+       while(p->next->next!=NULL)
+       {
+                p=p->next;
+       }
+       
+       q=p->next;
+       
+       p->next=NULL;
+       
+       free(q);
+ }
+     
+     
+     void delete_in_between()
+     {
+        struct Node *p;
+        int count=0;
+        
+        p=root;
+        
+        while(p!=NULL)
+        {
+                p=p->next;
+                count++;
+        }
+        
+        cout<<"lenght of list is:"<<count;
+        
+        if(count>=2)
+        {
+             cout<<"\nEnter the position of node you want to delete:";
+             int pos;
+             cin>>pos;
+             
+             struct Node *first;
+             
+             struct Node *second;
+             struct Node *mid;
+             
+             first=root;
+             
+             
+             int i=0;
+             while(i!=pos)
+             {
+                first=first->next;
+                i++;
+             }
+             
+             mid=first->next;
+             second=mid->next;
+             first->next=second;
+             
+             
+             free(mid);
+             cout<<"node deleted sucessfully....";
+             
+             while(second->next!=NULL)
+             {
+                        second=second->next;
+              }
+              second->next=NULL;
+           }
+      }
+             
+              
+              
+      
+      
+      void update_in_between_Node()
+      {
+       
+       
+       struct Node *p;
+       int count=0;
+       p=root;
+       
+       
+       
+       while(p!=NULL)
+       {
+             p=p->next;
+             count++;
+       }
+       
+       
+       cout<<"length of list is:"<<count;
+       
+      cout<<"Enter position of element you want to update:";
+      int pos;
+      cin>>pos;
+      
+      if(pos>count)
+      {
+        cout<<"not possible to update element:";
+       }
+       else
+       {
+       cout<<"\n Enter new Data:";
+       int data;
+       cin>>data;
+       
+            struct Node *temp;
+            temp=new Node;
+            
+            temp->next=NULL;
+            temp->data=data;
+            
+            int i=0;
+            struct Node *q;
+            q=root;
+            
+            while(i!=pos)
+            {
+                q=q->next;
+                i++;
+            }
+            
+            q->data=temp->data;
+            temp->next=q->next;
+            cout<<"data updated sucessfully...........";
+          }
+          
+      }
+                
+       
+       
+       
+     void updateFirst()
+     {
+        struct Node *p;
+        p=root;
+        
+        struct Node *temp;
+        temp=new Node;
+        
+        cout<<"Enter new data:";
+        int val;
+        cin>>val;
+        
+        temp->data=val;
+        temp->next=NULL;
+        
+        p->data=temp->data;
+        temp->next=p->next;
+        
+        cout<<"first node updated sucessfully....";
+    }
+    
+    
+    void updateLstNode()
+    {
+        struct Node *p;
+        struct Node *temp;
+        temp=new Node;
+        
+         cout<<"Enter new Data:";
+        int data;
+        cin>>data;
+        
+         temp->data=data;
+        temp->next=NULL;
+       
+        
+        
+        p=root;
+        while(p->next!=NULL)
+        {
+               p=p->next;
+               cout<<"\n"<<p->data;
+        }
+        
+      
+       
+        
+        p->data=temp->data;
+        p->next=temp->next;
+        cout<<"last Node updated sucessfully.....";
+    }
+        
+        
+        
+        
+      void searchNode()
+      {
+        struct Node *p;
+        
+        p=root;
+        int flag=0;
+        
+        cout<<"Enter search data:";
+        int data;
+        cin>>data;
+        
+        while(p->next!=NULL)
+        {
+                p=p->next;
+                if(p->data==data)
+                {
+                        flag=1;
+                        break;
+                 }
+          }
+          
+          if(flag==1)
+          {
+                cout<<p->next<<"elemet found:"<<p->data;
+           }
+           else
+           {
+                cout<<"Element not found!";
+            }
+        }
+        
+        
+        
+          
+        
+         
+      
+        
+                
+         
+       
+              
+ 
+ 
+
+                
+                
+        
+     void printList(struct Node *root)
+     {
+        struct Node *p;
+        p=root;
+        
+        if(p==NULL)
+        {
+                cout<<"\nlist is empty.........";
+        }
+        else
+        {
+                while(p!=NULL)
+                {
+                        cout<<"\t"<<p->data;
+                        p=p->next;
+                 }
+         }
+      }
+  };
+     
+                  
+         
+        
+    
+int main()
+{
+        SinlyLinkList s1;
+    while(true)
+    {
+    
+        cout<<"\n1.insert element in list:";
+        cout<<"\n2. print element element from list:";
+        cout<<"\n3.delete First node:";
+        cout<<"\n4.delete last node:";
+        cout<<"\n5.delete in between element";
+        cout<<"\n6.Update In Between  Node:";
+        cout<<"\n7. update fisrt Node:";
+        cout<<"\n8.update Last Node:";
+        cout<<"\n9.search element:";
+        
+        cout<<"\n0.exit:";
+        
+        cout<<"\nEnter your choice:";
+        int ch;
+        cin>>ch;
+        
+        switch(ch)
+        {
+                case 1:
+                        int data;
+                        cout<<"Enter data:";
+                        cin>>data;
+                        s1.insertAtBegining(data);
+                  
+                       break;
+                       
+                case 2:
+                        cout<<"element element are:";
+                        s1.printList(s1.root);
+                        break;
+                 case 3:
+                        s1.deleteFirstNode();
+                        break;
+                        
+                 case 4:
+                        s1.deleteLstNode();
+                        break;
+                        
+                        
+                  case 5:
+                         s1.delete_in_between();
+                         break;
+                         
+                  case 6:
+                        s1.update_in_between_Node();
+                        break;
+                        
+                        
+                   case 7:
+                        s1.updateFirst();
+                        break;
+                        
+                        
+                    case 8:
+                        s1.updateLstNode();
+                        break;
+                        
+                     case 9:
+                        s1.searchNode();
+                        break;
+                        
+                      case 0:
+                                return 0;
+                     
+                    
+                        
+                        
+                        
+        }
+     }
+     
+        
+        
+}
